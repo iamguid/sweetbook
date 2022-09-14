@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/packages/sweetbook/melos_sweetbook.iml" filepath="$PROJECT_DIR$/packages/sweetbook/melos_sweetbook.iml" />
+      <module fileurl="file://$PROJECT_DIR$/packages/sweetbook_cli/melos_sweetbook_cli.iml" filepath="$PROJECT_DIR$/packages/sweetbook_cli/melos_sweetbook_cli.iml" />
+      <module fileurl="file://$PROJECT_DIR$/melos_sweetbook.iml" filepath="$PROJECT_DIR$/melos_sweetbook.iml" />
+    </modules>
+  </component>
+</project>
