@@ -1,0 +1,54 @@
+{
+    // Используйте IntelliSense, чтобы узнать о возможных атрибутах.
+    // Наведите указатель мыши, чтобы просмотреть описания существующих атрибутов.
+    // Для получения дополнительной информации посетите: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "sweetbook_basic",
+            "cwd": "examples/sweetbook_basic",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "sweetbook_basic (profile mode)",
+            "cwd": "examples/sweetbook_basic",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "sweetbook_basic (release mode)",
+            "cwd": "examples/sweetbook_basic",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "sweetbook",
+            "cwd": "packages/sweetbook",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "sweetbook (profile mode)",
+            "cwd": "packages/sweetbook",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "sweetbook (release mode)",
+            "cwd": "packages/sweetbook",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        },
+        {
+            "name": "sweetbook_cli",
+            "cwd": "packages/sweetbook_cli",
+            "request": "launch",
+            "type": "dart"
+        }
+    ]
+}

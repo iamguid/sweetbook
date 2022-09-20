@@ -14,7 +14,10 @@
 		},
 		{
 			"name": "Sweetbook CLI Package",
-			"path": "packages/sweetbook_cli",
+			"path": "packages/sweetbook_cli"
+		},
+		{
+			"path": "../agent"
 		}
 	],
 	"settings": {

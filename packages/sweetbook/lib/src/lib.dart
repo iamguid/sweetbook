@@ -1,71 +1,41 @@
 import 'package:flutter/material.dart';
-import 'package:sweetbook/src/viewports.dart';
+import 'package:sweetbook/src/abstract/viewport.dart';
+import 'package:sweetbook/src/global_provider.dart';
 
-/// The main class that makes app for explore collection of widgets
+typedef SBViewportBuilder = Widget Function(
+  SBViewportState viewportState,
+  Widget widget,
+);
+
+typedef SBStoryCaseBuilder = Widget Function(SBViewportState viewportState);
+
 class Sweetbook extends StatelessWidget {
+  final List<SBStory> stories;
   final SBAppConfig appConfig;
-  final SBViewportBuilder builder;
+  final List<SBViewport> viewports;
 
   const Sweetbook(
-    List<SBStory> stories, {
+    this.stories, {
     required this.appConfig,
-    required this.builder,
+    required this.viewports,
   });
-
-  /// That static function needs for creating isolated widget container
-  ///
-  /// This function creates [SBStoryCaseContainer] widget in
-  /// [MaterialApp] container
-  static story(
-    SBStory story, {
-    required SBAppConfig appConfig,
-    required SBViewportBuilder builder,
-  }) {
-    return MaterialApp(
-        title: appConfig.title,
-        theme: appConfig.theme,
-        onGenerateRoute: (settings) {
-          switch (settings.name) {
-            case '/':
-              return MaterialPageRoute(
-                builder: (context) => ListView(
-                    children: story.cases
-                        .map((c) => TextButton(
-                            onPressed: () =>
-                                Navigator.pushNamed(context, '/${c.name}'),
-                            child: Text(c.name)))
-                        .toList()),
-              );
-            default:
-              final storyCaseName = settings.name!.split('/')[1];
-
-              final sbContext = SBContext(
-                stories: [story],
-                currentStoryCase: story.getCase(storyCaseName),
-              );
-
-              return MaterialPageRoute(
-                builder: (context) => builder(sbContext),
-              );
-          }
-        });
-  }
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return GlobalProvider(
+      appConfig: appConfig,
+      viewports: viewports,
+      stories: stories,
+      builder: (context, router) => MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        title: appConfig.title,
+        theme: appConfig.theme,
+        routeInformationProvider: router.routeInformationProvider,
+        routeInformationParser: router.routeInformationParser,
+        routerDelegate: router.routerDelegate,
+      ),
+    );
   }
-}
-
-class SBContext {
-  final List<SBStory> stories;
-  late SBStoryCase? currentStoryCase;
-
-  SBContext({
-    required this.stories,
-    this.currentStoryCase,
-  });
 }
 
 class SBAppConfig {
@@ -78,11 +48,52 @@ class SBAppConfig {
   });
 }
 
-class SBStory {
-  final String path;
+abstract class SBCatalogNode {
+  late SBCatalogNode? parent;
+
+  SBCatalogNode({
+    required this.parent,
+  });
+
+  String get name;
+
+  int get deep {
+    int d = 0;
+    SBCatalogNode? currentNode = this;
+
+    while (currentNode != null) {
+      d += 1;
+      currentNode = currentNode.parent;
+    }
+
+    return d;
+  }
+
+  String get path {
+    List<String> p = [];
+    SBCatalogNode? currentNode = this;
+
+    while (currentNode != null) {
+      p.add(currentNode.name);
+      currentNode = currentNode.parent;
+    }
+
+    return p.join('/');
+  }
+}
+
+class SBStory extends SBCatalogNode {
+  final String storyPath;
   final Map<String, SBStoryCase> _cases = {};
 
-  SBStory({required this.path});
+  SBStory({
+    required this.storyPath,
+  }) : super(parent: null);
+
+  @override
+  String get name {
+    return storyPath.split('/').last;
+  }
 
   List<SBStoryCase> get cases {
     return _cases.values.toList();
@@ -90,9 +101,9 @@ class SBStory {
 
   void addCase({
     required String name,
-    required SBViewportBuilder build,
+    required SBStoryCaseBuilder builder,
   }) {
-    _cases[name] = SBStoryCase(story: this, name: name, build: build);
+    _cases[name] = SBStoryCase(story: this, name: name, builder: builder);
   }
 
   SBStoryCase? getCase(String caseName) {
@@ -100,14 +111,49 @@ class SBStory {
   }
 }
 
-class SBStoryCase {
+class SBStoryCase extends SBCatalogNode {
   final SBStory story;
-  final String name;
-  final SBViewportBuilder build;
+  final SBStoryCaseBuilder builder;
 
   SBStoryCase({
     required this.story,
     required this.name,
-    required this.build,
+    required this.builder,
+  }) : super(parent: story);
+
+  @override
+  final String name;
+}
+
+class SBFolder extends SBCatalogNode {
+  final String title;
+  final List<SBFolder> children;
+  final List<SBStory> stories;
+  final bool isRoot;
+
+  SBFolder({
+    required this.title,
+    required this.children,
+    required this.stories,
+    required this.isRoot,
+  }) : super(parent: null);
+
+  @override
+  String get name {
+    return title;
+  }
+}
+
+class SBViewportState {
+  final SBStoryCase? currentStoryCase;
+  final SBViewport? viewport;
+
+  const SBViewportState({
+    required this.currentStoryCase,
+    required this.viewport,
   });
+
+  factory SBViewportState.empty() {
+    return SBViewportState(currentStoryCase: null, viewport: null);
+  }
 }

@@ -1,16 +1,15 @@
 import 'package:sweetbook/sweetbook.dart';
 import 'package:sweetbook_basic/models/candy_model.dart';
-import 'package:sweetbook_basic/sweetbook/main.dart';
 import 'package:sweetbook_basic/widgets/candy_card.dart';
 
 void main(List<String> args) {
-  runStory(candyCardStory);
+  // runStory(candyCardStory);
 }
 
-final candyCardStory = SBStory(path: 'Candies/CandyCard')
+final candyCardStory = SBStory(storyPath: 'Candies/CandyCard')
   ..addCase(
     name: 'default',
-    build: (context) => CandyCard(
+    builder: (context) => CandyCard(
       model: CandyModel(
         title: 'LollyPop',
         price: 1,
@@ -20,7 +19,7 @@ final candyCardStory = SBStory(path: 'Candies/CandyCard')
   )
   ..addCase(
     name: 'long_title',
-    build: (context) => CandyCard(
+    builder: (context) => CandyCard(
       model: CandyModel(
         title:
             'LongTitleLongTitleLongTitleLongTitleLongTitleLongTitleLongTitleLongTitleLongTitle',
