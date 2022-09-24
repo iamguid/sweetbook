@@ -99,6 +99,12 @@ class SBStory extends SBCatalogNode {
     return _cases.values.toList();
   }
 
+  void addCases(List<SBStoryCase> cases) {
+    for (var storyCase in cases) {
+      _cases[storyCase.name] = storyCase;
+    }
+  }
+
   void addCase({
     required String name,
     required SBStoryCaseBuilder builder,

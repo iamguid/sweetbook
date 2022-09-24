@@ -18,8 +18,10 @@ class CatalogStateAgent extends StateAgent<CatalogState, BaseEvent> {
 
   void onStoryCasePress(SBStoryCase storyCase) {
     final newState = CatalogState(
-      expandedNodes: state.expandedNodes,
+      expandedNodesPath: state.expandedNodesPath,
+      allExapanded: state.allExapanded,
       currentSelectedStoryCase: storyCase,
+      filterString: state.filterString,
     );
 
     nextState(newState);
@@ -27,15 +29,28 @@ class CatalogStateAgent extends StateAgent<CatalogState, BaseEvent> {
 
   void toggleExpandedNode(SBCatalogNode node) {
     final newState = CatalogState(
-      expandedNodes: Set.from(state.expandedNodes),
+      expandedNodesPath: Set.from(state.expandedNodesPath),
+      allExapanded: state.allExapanded,
       currentSelectedStoryCase: state.currentSelectedStoryCase,
+      filterString: state.filterString,
     );
 
-    if (newState.expandedNodes.contains(node)) {
-      newState.expandedNodes.remove(node);
+    if (newState.expandedNodesPath.contains(node.path)) {
+      newState.expandedNodesPath.remove(node.path);
     } else {
-      newState.expandedNodes.add(node);
+      newState.expandedNodesPath.add(node.path);
     }
+
+    nextState(newState);
+  }
+
+  void onSearchStringChanged(String search) {
+    final newState = CatalogState(
+      expandedNodesPath: state.expandedNodesPath,
+      allExapanded: search.isEmpty ? false : true,
+      currentSelectedStoryCase: state.currentSelectedStoryCase,
+      filterString: search,
+    );
 
     nextState(newState);
   }
@@ -56,6 +71,10 @@ class CatalogStateAgent extends StateAgent<CatalogState, BaseEvent> {
 
     if (event is CatalogStoryCasePressEvent) {
       onStoryCasePress(event.payload);
+    }
+
+    if (event is CatalogSearchStringChanged) {
+      onSearchStringChanged(event.payload);
     }
   }
 }

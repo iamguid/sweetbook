@@ -77,3 +77,84 @@ SBFolder getFoldersTree(List<SBStory> stories) {
 
   return rootFolder;
 }
+
+SBStory filterStory(
+  SBStory story,
+  bool Function(SBStoryCase storyCase) predicate,
+) {
+  final filteredStoryCases = story.cases.where(predicate).toList();
+  final newStory = SBStory(storyPath: story.storyPath);
+
+  if (filteredStoryCases.isNotEmpty) {
+    newStory.addCases(filteredStoryCases);
+  }
+
+  return newStory;
+}
+
+SBFolder filterFolder(
+  SBFolder rootFolder,
+  bool Function(SBStoryCase storyCase) predicate,
+) {
+  final List<SBFolder> filteredFolders = [];
+  final List<SBFolder> newFolders = [];
+
+  final newRootFolder = SBFolder(
+    title: rootFolder.title,
+    isRoot: rootFolder.isRoot,
+    children: [],
+    stories: [],
+  );
+
+  final rootFilteredStories = rootFolder.stories
+      .map((story) => filterStory(story, predicate))
+      .where((story) => story.cases.isNotEmpty);
+
+  newRootFolder.stories.addAll(rootFilteredStories);
+
+  filteredFolders.addAll(rootFolder.children.reversed);
+
+  while (filteredFolders.isNotEmpty) {
+    final currentFilteredFolder = filteredFolders.removeLast();
+
+    if (newFolders.isEmpty) {
+      newFolders.add(newRootFolder);
+    }
+
+    newFolders.add(SBFolder(
+      title: currentFilteredFolder.title,
+      isRoot: currentFilteredFolder.isRoot,
+      children: [],
+      stories: [],
+    ));
+
+    for (var story in currentFilteredFolder.stories) {
+      final newStory = filterStory(story, predicate);
+
+      if (newStory.cases.isNotEmpty) {
+        var prevNewFolder = newFolders.removeLast();
+        prevNewFolder.stories.add(newStory);
+
+        SBFolder currentNewFolder = newRootFolder;
+
+        if (newFolders.isNotEmpty) {
+          while (newFolders.isNotEmpty) {
+            currentNewFolder = newFolders.removeLast();
+            currentNewFolder.children.add(prevNewFolder);
+            prevNewFolder = currentNewFolder;
+          }
+        } else {
+          currentNewFolder.children.add(prevNewFolder);
+        }
+      }
+    }
+
+    if (currentFilteredFolder.children.isEmpty && newFolders.isNotEmpty) {
+      newFolders.removeLast();
+    }
+
+    filteredFolders.addAll(currentFilteredFolder.children.reversed);
+  }
+
+  return newRootFolder;
+}

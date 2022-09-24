@@ -1,7 +1,7 @@
 import 'package:sweetbook/src/base_event.dart';
 import 'package:sweetbook/sweetbook.dart';
 
-abstract class CatalogEvent<T extends SBCatalogNode> extends PayloadedEvent<T> {
+abstract class CatalogEvent<T> extends PayloadedEvent<T> {
   CatalogEvent(super.payload);
 }
 
@@ -15,4 +15,8 @@ class CatalogStoryPressEvent extends CatalogEvent<SBStory> {
 
 class CatalogStoryCasePressEvent extends CatalogEvent<SBStoryCase> {
   CatalogStoryCasePressEvent(super.payload);
+}
+
+class CatalogSearchStringChanged extends CatalogEvent<String> {
+  CatalogSearchStringChanged(super.payload);
 }

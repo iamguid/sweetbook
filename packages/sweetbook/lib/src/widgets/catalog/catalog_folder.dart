@@ -25,7 +25,9 @@ class CatalogFolderWidget extends StatelessWidget {
 
   Widget buildFolder(BuildContext context, SBFolder folder) {
     final catalogStateAgent = AgentProvider.of<CatalogStateAgent>(context);
-    final isExpanded = catalogStateAgent.state.expandedNodes.contains(folder);
+    final isExpanded =
+        catalogStateAgent.state.expandedNodesPath.contains(folder.path) ||
+            catalogStateAgent.state.allExapanded;
 
     return InkWell(
       onTap: () => catalogStateAgent.dispatch(CatalogFolderPressEvent(folder)),
@@ -63,7 +65,9 @@ class CatalogFolderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final catalogStateAgent = AgentProvider.of<CatalogStateAgent>(context);
-    final isExpanded = catalogStateAgent.state.expandedNodes.contains(folder);
+    final isExpanded =
+        catalogStateAgent.state.expandedNodesPath.contains(folder.path) ||
+            catalogStateAgent.state.allExapanded;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,

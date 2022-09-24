@@ -22,7 +22,9 @@ class CatalogStoryWidget extends StatelessWidget {
 
   Widget buildStory(BuildContext context, SBStory story) {
     final catalogStateAgent = AgentProvider.of<CatalogStateAgent>(context);
-    final isExpanded = catalogStateAgent.state.expandedNodes.contains(story);
+    final isExpanded =
+        catalogStateAgent.state.expandedNodesPath.contains(story.path) ||
+            catalogStateAgent.state.allExapanded;
 
     return InkWell(
       onTap: () => catalogStateAgent.dispatch(CatalogStoryPressEvent(story)),
@@ -60,7 +62,9 @@ class CatalogStoryWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final catalogStateAgent = AgentProvider.of<CatalogStateAgent>(context);
-    final isExpanded = catalogStateAgent.state.expandedNodes.contains(story);
+    final isExpanded =
+        catalogStateAgent.state.expandedNodesPath.contains(story.path) ||
+            catalogStateAgent.state.allExapanded;
 
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,

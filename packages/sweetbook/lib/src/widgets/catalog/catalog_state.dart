@@ -1,17 +1,23 @@
 import 'package:sweetbook/sweetbook.dart';
 
 class CatalogState {
-  final Set<SBCatalogNode> expandedNodes;
+  final Set<String> expandedNodesPath;
+  final String filterString;
+  final bool allExapanded;
   final SBStoryCase? currentSelectedStoryCase;
 
   const CatalogState({
-    required this.expandedNodes,
+    required this.expandedNodesPath,
+    required this.filterString,
+    required this.allExapanded,
     required this.currentSelectedStoryCase,
   });
 
   factory CatalogState.empty() {
     return CatalogState(
-      expandedNodes: {},
+      allExapanded: false,
+      expandedNodesPath: {},
+      filterString: '',
       currentSelectedStoryCase: null,
     );
   }
