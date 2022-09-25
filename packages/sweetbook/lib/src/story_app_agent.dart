@@ -1,30 +1,22 @@
 import 'package:agent_flutter/agent_flutter.dart';
 import 'package:go_router/go_router.dart';
-import 'package:sweetbook/src/abstract/viewport.dart';
 import 'package:sweetbook/src/base_event.dart';
 import 'package:sweetbook/src/global_events.dart';
 import 'package:sweetbook/src/widgets/catalog/catalog_events.dart';
 import 'package:sweetbook/src/widgets/catalog/catalog_state_agent.dart';
-import 'package:sweetbook/src/widgets/header/header_state_agent.dart';
 import 'package:sweetbook/src/widgets/viewport/viewport_state_agent.dart';
-import 'package:sweetbook/sweetbook.dart';
 
-class GlobalAgent extends Agent<BaseEvent> {
+class StoryAppAgent extends Agent<BaseEvent> {
   final GoRouter router;
-  final HeaderStateAgent headerStateAgent;
   final ViewportStateAgent viewportStateAgent;
   final CatalogStateAgent catalogStateAgent;
 
-  GlobalAgent({
+  StoryAppAgent({
     required this.router,
-    required this.headerStateAgent,
     required this.viewportStateAgent,
     required this.catalogStateAgent,
   }) : super() {
     router.addListener(routerListener);
-
-    headerStateAgent.connect(this);
-    connect(headerStateAgent);
 
     viewportStateAgent.connect(this);
     connect(viewportStateAgent);
@@ -39,6 +31,11 @@ class GlobalAgent extends Agent<BaseEvent> {
   void onEvent(event) {
     if (event is CatalogStoryCasePressEvent) {
       dispatch(GlobalEventStoryCaseChanged(event.payload));
+      router.pushNamed('/case');
+    }
+
+    if (event is GlobalEventBackToCatalog) {
+      router.pop();
     }
   }
 }

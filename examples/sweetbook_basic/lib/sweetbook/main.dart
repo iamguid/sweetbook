@@ -22,3 +22,13 @@ void runCatalog(List<SBStory> stories) {
     ),
   );
 }
+
+void runStory(SBStory storie) {
+  runApp(
+    Sweetbook.story(
+      storie,
+      appConfig: defaultAppConfig,
+      viewport: SBDevelopmentViewport(title: 'TEST'),
+    ),
+  );
+}

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sweetbook/src/abstract/viewport.dart';
-import 'package:sweetbook/src/global_provider.dart';
+import 'package:sweetbook/src/catalog_app_provider.dart';
+import 'package:sweetbook/src/global_events.dart';
+import 'package:sweetbook/src/story_app_provider.dart';
 
 typedef SBViewportBuilder = Widget Function(
   SBViewportState viewportState,
@@ -20,9 +22,29 @@ class Sweetbook extends StatelessWidget {
     required this.viewports,
   });
 
+  static story(
+    SBStory story, {
+    required appConfig,
+    required viewport,
+  }) {
+    return StoryAppProvider(
+      appConfig: appConfig,
+      viewport: viewport,
+      story: story,
+      builder: (context, router) => MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        title: appConfig.title,
+        theme: appConfig.theme,
+        routeInformationProvider: router.routeInformationProvider,
+        routeInformationParser: router.routeInformationParser,
+        routerDelegate: router.routerDelegate,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return GlobalProvider(
+    return CatalogAppProvider(
       appConfig: appConfig,
       viewports: viewports,
       stories: stories,
@@ -153,13 +175,19 @@ class SBFolder extends SBCatalogNode {
 class SBViewportState {
   final SBStoryCase? currentStoryCase;
   final SBViewport? viewport;
+  final SBAppMode? mode;
 
   const SBViewportState({
     required this.currentStoryCase,
     required this.viewport,
+    required this.mode,
   });
 
   factory SBViewportState.empty() {
-    return SBViewportState(currentStoryCase: null, viewport: null);
+    return SBViewportState(
+      currentStoryCase: null,
+      viewport: null,
+      mode: null,
+    );
   }
 }

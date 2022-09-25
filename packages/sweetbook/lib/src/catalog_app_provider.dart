@@ -3,26 +3,27 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:sweetbook/src/abstract/viewport.dart';
 import 'package:sweetbook/src/catalog_app.dart';
-import 'package:sweetbook/src/global_agent.dart';
-import 'package:sweetbook/src/router/create_sweetbook_router.dart';
+import 'package:sweetbook/src/catalog_app_agent.dart';
+import 'package:sweetbook/src/global_events.dart';
+import 'package:sweetbook/src/router/create_catalog_app_router.dart';
 import 'package:sweetbook/src/utils.dart';
 import 'package:sweetbook/src/widgets/catalog/catalog_state_agent.dart';
 import 'package:sweetbook/src/widgets/header/header_state_agent.dart';
 import 'package:sweetbook/src/widgets/viewport/viewport_state_agent.dart';
 import 'package:sweetbook/sweetbook.dart';
 
-typedef GlobalProviderChildBuilder = Widget Function(
+typedef CatalogAppProviderChildBuilder = Widget Function(
   BuildContext context,
   GoRouter router,
 );
 
-class GlobalProvider extends StatefulWidget {
+class CatalogAppProvider extends StatefulWidget {
   final SBAppConfig appConfig;
   final List<SBViewport> viewports;
   final List<SBStory> stories;
-  final GlobalProviderChildBuilder builder;
+  final CatalogAppProviderChildBuilder builder;
 
-  const GlobalProvider({
+  const CatalogAppProvider({
     super.key,
     required this.appConfig,
     required this.viewports,
@@ -31,13 +32,13 @@ class GlobalProvider extends StatefulWidget {
   });
 
   @override
-  createState() => GlobalProviderState();
+  createState() => CatalogAppProviderState();
 }
 
-class GlobalProviderState extends State<GlobalProvider> {
+class CatalogAppProviderState extends State<CatalogAppProvider> {
   late GoRouter router;
   late SBFolder rootFolder;
-  late GlobalAgent globalAgent;
+  late CatalogAppAgent globalAgent;
   late HeaderStateAgent headerStateAgent;
   late CatalogStateAgent catalogStateAgent;
   late ViewportStateAgent viewportStateAgent;
@@ -50,22 +51,22 @@ class GlobalProviderState extends State<GlobalProvider> {
     catalogStateAgent = CatalogStateAgent();
     viewportStateAgent = ViewportStateAgent();
 
-    router = createSweetbookRouter(
+    router = createCatalogAppRouter(
       rootWidgetBuilder: () => CatalogAppWidget(
         rootFolder: rootFolder,
         appConfig: widget.appConfig,
         viewports: widget.viewports,
       ),
-      catalogStateAgent: catalogStateAgent,
-      viewportStateAgent: viewportStateAgent,
     );
 
-    globalAgent = GlobalAgent(
+    globalAgent = CatalogAppAgent(
       router: router,
       headerStateAgent: headerStateAgent,
       viewportStateAgent: viewportStateAgent,
       catalogStateAgent: catalogStateAgent,
     );
+
+    globalAgent.dispatch(GlobalEventModeChanged(SBAppMode.catalog));
 
     super.initState();
   }

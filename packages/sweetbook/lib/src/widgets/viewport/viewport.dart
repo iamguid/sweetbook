@@ -1,5 +1,6 @@
 import 'package:agent_flutter/agent_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:sweetbook/src/global_events.dart';
 import 'package:sweetbook/src/widgets/viewport/viewport_state_agent.dart';
 import 'package:sweetbook/src/widgets/viewport/viewport_empty.dart';
 import 'package:sweetbook/sweetbook.dart';
@@ -20,8 +21,31 @@ class ViewportWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final viewportStateAgent = AgentProvider.of<ViewportStateAgent>(context);
+
     return StateAgentBuilder<ViewportStateAgent, SBViewportState>(
-      builder: buildViewport,
+      builder: (context, state) => Stack(children: [
+        Expanded(
+          child: Align(
+            alignment: Alignment.center,
+            child: buildViewport(context, state),
+          ),
+        ),
+        state.mode == SBAppMode.story
+            ? Align(
+                alignment: Alignment.topLeft,
+                child: ElevatedButton(
+                  onPressed: () =>
+                      viewportStateAgent.dispatch(GlobalEventBackToCatalog()),
+                  child: Icon(Icons.arrow_back_rounded, color: Colors.white),
+                  style: ElevatedButton.styleFrom(
+                      shape: CircleBorder(),
+                      padding: EdgeInsets.all(20),
+                      backgroundColor: Theme.of(context).cardColor),
+                ),
+              )
+            : Container(),
+      ]),
     );
   }
 }

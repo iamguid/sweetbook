@@ -21,6 +21,7 @@ class CatalogStateAgent extends StateAgent<CatalogState, BaseEvent> {
       expandedNodesPath: state.expandedNodesPath,
       allExapanded: state.allExapanded,
       currentSelectedStoryCase: storyCase,
+      mode: state.mode,
       filterString: state.filterString,
     );
 
@@ -32,6 +33,7 @@ class CatalogStateAgent extends StateAgent<CatalogState, BaseEvent> {
       expandedNodesPath: Set.from(state.expandedNodesPath),
       allExapanded: state.allExapanded,
       currentSelectedStoryCase: state.currentSelectedStoryCase,
+      mode: state.mode,
       filterString: state.filterString,
     );
 
@@ -44,12 +46,25 @@ class CatalogStateAgent extends StateAgent<CatalogState, BaseEvent> {
     nextState(newState);
   }
 
-  void onSearchStringChanged(String search) {
+  void onSearchStringChanged(String filterString) {
     final newState = CatalogState(
       expandedNodesPath: state.expandedNodesPath,
-      allExapanded: search.isEmpty ? false : true,
+      allExapanded: filterString.isEmpty ? state.mode == SBAppMode.story : true,
       currentSelectedStoryCase: state.currentSelectedStoryCase,
-      filterString: search,
+      mode: state.mode,
+      filterString: filterString,
+    );
+
+    nextState(newState);
+  }
+
+  void onAppModeChanged(SBAppMode mode) {
+    final newState = CatalogState(
+      expandedNodesPath: state.expandedNodesPath,
+      allExapanded: mode == SBAppMode.story,
+      currentSelectedStoryCase: state.currentSelectedStoryCase,
+      mode: mode,
+      filterString: state.filterString,
     );
 
     nextState(newState);
@@ -57,6 +72,10 @@ class CatalogStateAgent extends StateAgent<CatalogState, BaseEvent> {
 
   @override
   void onEvent(event) {
+    if (event is GlobalEventModeChanged) {
+      onAppModeChanged(event.payload);
+    }
+
     if (event is GlobalEventStoryCaseChanged) {
       onStoryCasePress(event.payload);
     }

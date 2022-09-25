@@ -1,9 +1,10 @@
 import 'package:sweetbook/sweetbook.dart';
 import 'package:sweetbook_basic/models/candy_model.dart';
+import 'package:sweetbook_basic/sweetbook/main.dart';
 import 'package:sweetbook_basic/widgets/candy_card.dart';
 
 void main(List<String> args) {
-  // runStory(candyCardStory);
+  runStory(candyCardStory);
 }
 
 final candyCardStory = SBStory(storyPath: 'Candies/CandyCard')
