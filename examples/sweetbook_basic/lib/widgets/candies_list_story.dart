@@ -13,9 +13,24 @@ final candiesListStory = SBStory(storyPath: 'CandiesList')
     builder: (context) => CandiesList(
       candies: [
         CandyModel(
-          title: 'LollyPop',
+          title: 'Chocolate',
           price: 1,
-          picturePath: 'assets/lollypop.png',
+          picturePath: 'assets/chocolate.jpeg',
+        ),
+        CandyModel(
+          title: 'Cruissant',
+          price: 1,
+          picturePath: 'assets/croissant.jpeg',
+        ),
+        CandyModel(
+          title: 'Icecream',
+          price: 1,
+          picturePath: 'assets/icecream.jpeg',
+        ),
+        CandyModel(
+          title: 'Donut',
+          price: 1,
+          picturePath: 'assets/donut.jpeg',
         ),
       ],
     ),

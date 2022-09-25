@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:sweetbook/src/abstract/decorator.dart';
 import 'package:sweetbook/src/abstract/viewport.dart';
 import 'package:sweetbook/src/catalog_app_provider.dart';
+import 'package:sweetbook/src/decorators/just_decorator.dart';
 import 'package:sweetbook/src/global_events.dart';
 import 'package:sweetbook/src/story_app_provider.dart';
 
@@ -130,8 +132,14 @@ class SBStory extends SBCatalogNode {
   void addCase({
     required String name,
     required SBStoryCaseBuilder builder,
+    SBDecorator decorator = const JustDecorator(),
   }) {
-    _cases[name] = SBStoryCase(story: this, name: name, builder: builder);
+    _cases[name] = SBStoryCase(
+      story: this,
+      name: name,
+      builder: builder,
+      decorator: decorator,
+    );
   }
 
   SBStoryCase? getCase(String caseName) {
@@ -142,11 +150,13 @@ class SBStory extends SBCatalogNode {
 class SBStoryCase extends SBCatalogNode {
   final SBStory story;
   final SBStoryCaseBuilder builder;
+  final SBDecorator decorator;
 
   SBStoryCase({
     required this.story,
     required this.name,
     required this.builder,
+    required this.decorator,
   }) : super(parent: story);
 
   @override

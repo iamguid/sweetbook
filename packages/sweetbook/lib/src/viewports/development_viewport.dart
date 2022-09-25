@@ -7,12 +7,9 @@ class SBDevelopmentViewport extends SBViewport {
 
   @override
   Widget build(SBViewportState state, Widget widget) {
-    return FittedBox(
-      fit: BoxFit.contain,
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: widget,
-      ),
+    return Padding(
+      padding: const EdgeInsets.all(10),
+      child: widget,
     );
   }
 }

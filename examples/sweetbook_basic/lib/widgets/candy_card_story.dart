@@ -9,23 +9,46 @@ void main(List<String> args) {
 
 final candyCardStory = SBStory(storyPath: 'Candies/CandyCard')
   ..addCase(
-    name: 'default',
+    name: 'chocolate',
+    decorator: const CenterDecorator(),
     builder: (context) => CandyCard(
       model: CandyModel(
-        title: 'LollyPop',
+        title: 'Chocolate',
         price: 1,
-        picturePath: 'assets/lollypop.png',
+        picturePath: 'assets/chocolate.jpeg',
       ),
     ),
   )
   ..addCase(
-    name: 'long_title',
+    name: 'cruissant',
+    decorator: const CenterDecorator(),
     builder: (context) => CandyCard(
       model: CandyModel(
-        title:
-            'LongTitleLongTitleLongTitleLongTitleLongTitleLongTitleLongTitleLongTitleLongTitle',
+        title: 'Cruissant',
         price: 1,
-        picturePath: 'assets/lollypop.png',
+        picturePath: 'assets/croissant.jpeg',
+      ),
+    ),
+  )
+  ..addCase(
+    name: 'icecream',
+    decorator: const CenterDecorator(),
+    builder: (context) => CandyCard(
+      model: CandyModel(
+        title: 'Icecream',
+        price: 1,
+        picturePath: 'assets/icecream.jpeg',
+      ),
+    ),
+  )
+  ..addCase(
+    name: 'donut',
+    decorator: const CenterDecorator(),
+    builder: (context) => CandyCard(
+      model: CandyModel(
+        title: 'Donut',
+        price: 1,
+        picturePath: 'assets/donut.jpeg',
       ),
     ),
   );

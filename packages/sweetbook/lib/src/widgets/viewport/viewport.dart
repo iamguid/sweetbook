@@ -13,8 +13,10 @@ class ViewportWidget extends StatelessWidget {
       return ViewportEmptyWidget();
     }
 
-    final storyCaseWidget = state.currentStoryCase!.builder(state);
-    final viewportWidget = state.viewport!.build(state, storyCaseWidget);
+    final storyCase = state.currentStoryCase!;
+    final storyCaseWidget = storyCase.builder(state);
+    final decoratorWidget = storyCase.decorator.build(state, storyCaseWidget);
+    final viewportWidget = state.viewport!.build(state, decoratorWidget);
 
     return viewportWidget;
   }

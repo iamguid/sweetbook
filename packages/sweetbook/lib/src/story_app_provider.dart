@@ -7,7 +7,6 @@ import 'package:sweetbook/src/router/create_story_app_router.dart';
 import 'package:sweetbook/src/story_app_agent.dart';
 import 'package:sweetbook/src/story_app_case_page.dart';
 import 'package:sweetbook/src/story_app_catalog_page.dart';
-import 'package:sweetbook/src/utils.dart';
 import 'package:sweetbook/src/widgets/catalog/catalog_state_agent.dart';
 import 'package:sweetbook/src/widgets/header/header_state_agent.dart';
 import 'package:sweetbook/src/widgets/viewport/viewport_state_agent.dart';
