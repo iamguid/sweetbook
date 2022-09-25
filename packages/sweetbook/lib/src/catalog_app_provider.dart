@@ -23,13 +23,13 @@ class CatalogAppProvider extends StatefulWidget {
   final List<SBStory> stories;
   final CatalogAppProviderChildBuilder builder;
 
-  const CatalogAppProvider({
+  CatalogAppProvider({
     super.key,
     required this.appConfig,
     required this.viewports,
     required this.stories,
     required this.builder,
-  });
+  }) : assert(viewports.isNotEmpty, 'You should provide minimum one viewport');
 
   @override
   createState() => CatalogAppProviderState();
@@ -66,6 +66,7 @@ class CatalogAppProviderState extends State<CatalogAppProvider> {
       catalogStateAgent: catalogStateAgent,
     );
 
+    globalAgent.dispatch(GlobalEventViewportChanged(widget.viewports.first));
     globalAgent.dispatch(GlobalEventModeChanged(SBAppMode.catalog));
 
     super.initState();
