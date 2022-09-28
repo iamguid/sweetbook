@@ -1,17 +1,14 @@
 name: sweetbook
-description: A starting point for Dart libraries or applications.
-version: 1.0.0
-# homepage: https://www.example.com
+description: Sweetbook main library
+version: 0.1.0
+homepage: https://github.com/iamguid/sweetbook
 
 environment:
   sdk: '>=2.18.0 <3.0.0'
 
 dependencies:
   go_router: ^4.5.0
-  agent_flutter:
-    path: ../../../agent/packages/agent_flutter
-  agent_core:
-    path: ../../../agent/packages/agent_core
+  agent_flutter: ^0.1.2
   flutter:
     sdk: flutter
 
