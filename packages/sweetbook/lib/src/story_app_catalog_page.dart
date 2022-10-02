@@ -12,10 +12,10 @@ class StoryAppCatalogPageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Padding(
+    return Scaffold(
+      body: Padding(
         padding: EdgeInsets.all(10),
-        child: Expanded(child: CatalogWidget(rootFolder: rootFolder)),
+        child: CatalogWidget(rootFolder: rootFolder),
       ),
     );
   }

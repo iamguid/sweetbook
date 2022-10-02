@@ -27,11 +27,9 @@ class ViewportWidget extends StatelessWidget {
 
     return StateAgentBuilder<ViewportStateAgent, SBViewportState>(
       builder: (context, state) => Stack(children: [
-        Expanded(
-          child: Align(
-            alignment: Alignment.center,
-            child: buildViewport(context, state),
-          ),
+        Align(
+          alignment: Alignment.center,
+          child: buildViewport(context, state),
         ),
         state.mode == SBAppMode.story
             ? Align(
