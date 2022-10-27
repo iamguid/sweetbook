@@ -8,7 +8,7 @@ environment:
 
 dependencies:
   go_router: ^4.5.0
-  agent_flutter: ^0.1.2
+  agent_flutter: ^0.2.1
   flutter:
     sdk: flutter
 

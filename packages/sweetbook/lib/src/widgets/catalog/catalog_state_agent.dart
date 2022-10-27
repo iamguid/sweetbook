@@ -6,26 +6,54 @@ import 'package:sweetbook/src/widgets/catalog/catalog_state.dart';
 import 'package:sweetbook/sweetbook.dart';
 
 class CatalogStateAgent extends StateAgent<CatalogState, BaseEvent> {
-  CatalogStateAgent() : super(CatalogState.empty());
-
-  void onFolderPress(SBFolder folder) {
-    toggleExpandedNode(folder);
+  CatalogStateAgent() : super(CatalogState.empty()) {
+    on<GlobalEventModeChanged>(onAppModeChanged);
+    on<GlobalEventStoryCaseChanged>(onStoryCaseChanged);
+    on<CatalogSearchStringChanged>(onSearchStringChanged);
+    on<CatalogFolderPressEvent>(onFolderPress);
+    on<CatalogStoryPressEvent>(onStoryPress);
+    on<CatalogStoryCasePressEvent>(onStoryCasePress);
   }
 
-  void onStoryPress(SBStory story) {
-    toggleExpandedNode(story);
-  }
-
-  void onStoryCasePress(SBStoryCase storyCase) {
+  void onAppModeChanged(GlobalEventModeChanged event) {
     final newState = CatalogState(
       expandedNodesPath: state.expandedNodesPath,
-      allExapanded: state.allExapanded,
-      currentSelectedStoryCase: storyCase,
-      mode: state.mode,
+      allExapanded: event.payload == SBAppMode.story,
+      currentSelectedStoryCase: state.currentSelectedStoryCase,
+      mode: event.payload,
       filterString: state.filterString,
     );
 
     nextState(newState);
+  }
+
+  void onStoryCaseChanged(GlobalEventStoryCaseChanged event) {
+    changeStoryCase(event.payload);
+  }
+
+  void onSearchStringChanged(CatalogSearchStringChanged event) {
+    final newState = CatalogState(
+      expandedNodesPath: state.expandedNodesPath,
+      allExapanded:
+          event.payload.isEmpty ? state.mode == SBAppMode.story : true,
+      currentSelectedStoryCase: state.currentSelectedStoryCase,
+      mode: state.mode,
+      filterString: event.payload,
+    );
+
+    nextState(newState);
+  }
+
+  void onFolderPress(CatalogFolderPressEvent event) {
+    toggleExpandedNode(event.payload);
+  }
+
+  void onStoryPress(CatalogStoryPressEvent event) {
+    toggleExpandedNode(event.payload);
+  }
+
+  void onStoryCasePress(CatalogStoryCasePressEvent event) {
+    changeStoryCase(event.payload);
   }
 
   void toggleExpandedNode(SBCatalogNode node) {
@@ -46,54 +74,15 @@ class CatalogStateAgent extends StateAgent<CatalogState, BaseEvent> {
     nextState(newState);
   }
 
-  void onSearchStringChanged(String filterString) {
+  void changeStoryCase(SBStoryCase storyCase) {
     final newState = CatalogState(
       expandedNodesPath: state.expandedNodesPath,
-      allExapanded: filterString.isEmpty ? state.mode == SBAppMode.story : true,
-      currentSelectedStoryCase: state.currentSelectedStoryCase,
+      allExapanded: state.allExapanded,
+      currentSelectedStoryCase: storyCase,
       mode: state.mode,
-      filterString: filterString,
-    );
-
-    nextState(newState);
-  }
-
-  void onAppModeChanged(SBAppMode mode) {
-    final newState = CatalogState(
-      expandedNodesPath: state.expandedNodesPath,
-      allExapanded: mode == SBAppMode.story,
-      currentSelectedStoryCase: state.currentSelectedStoryCase,
-      mode: mode,
       filterString: state.filterString,
     );
 
     nextState(newState);
-  }
-
-  @override
-  void onEvent(event) {
-    if (event is GlobalEventModeChanged) {
-      onAppModeChanged(event.payload);
-    }
-
-    if (event is GlobalEventStoryCaseChanged) {
-      onStoryCasePress(event.payload);
-    }
-
-    if (event is CatalogFolderPressEvent) {
-      onFolderPress(event.payload);
-    }
-
-    if (event is CatalogStoryPressEvent) {
-      onStoryPress(event.payload);
-    }
-
-    if (event is CatalogStoryCasePressEvent) {
-      onStoryCasePress(event.payload);
-    }
-
-    if (event is CatalogSearchStringChanged) {
-      onSearchStringChanged(event.payload);
-    }
   }
 }

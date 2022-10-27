@@ -1,7 +1,6 @@
 import 'package:agent_flutter/agent_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:sweetbook/src/abstract/viewport.dart';
-import 'package:sweetbook/src/catalog_app_agent.dart';
 import 'package:sweetbook/src/global_events.dart';
 import 'package:sweetbook/src/widgets/header/header_state.dart';
 import 'package:sweetbook/src/widgets/header/header_state_agent.dart';

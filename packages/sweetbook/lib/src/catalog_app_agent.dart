@@ -19,24 +19,12 @@ class CatalogAppAgent extends Agent<BaseEvent> {
     required this.viewportStateAgent,
     required this.catalogStateAgent,
   }) : super() {
-    router.addListener(routerListener);
-
-    headerStateAgent.connect(this);
-    connect(headerStateAgent);
-
-    viewportStateAgent.connect(this);
-    connect(viewportStateAgent);
-
-    catalogStateAgent.connect(this);
-    connect(catalogStateAgent);
-  }
-
-  void routerListener() {}
-
-  @override
-  void onEvent(event) {
-    if (event is CatalogStoryCasePressEvent) {
+    on<CatalogStoryCasePressEvent>((event) {
       dispatch(GlobalEventStoryCaseChanged(event.payload));
-    }
+    });
+
+    connect(headerStateAgent);
+    connect(viewportStateAgent);
+    connect(catalogStateAgent);
   }
 }

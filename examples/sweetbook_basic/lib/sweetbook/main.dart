@@ -6,6 +6,7 @@ import 'package:sweetbook_basic/widgets/candy_card_story.dart';
 final defaultTheme = ThemeData.dark();
 final defaultAppConfig = SBAppConfig(title: 'candyshop', theme: defaultTheme);
 final allStroies = <SBStory>[candyCardStory, candiesListStory];
+final devViewport = SBDevelopmentViewport(title: 'TEST');
 
 void main(List<String> args) {
   runCatalog(allStroies);
@@ -16,9 +17,7 @@ void runCatalog(List<SBStory> stories) {
     Sweetbook(
       stories,
       appConfig: defaultAppConfig,
-      viewports: [
-        SBDevelopmentViewport(title: 'TEST'),
-      ],
+      viewports: [devViewport],
     ),
   );
 }
@@ -28,7 +27,7 @@ void runStory(SBStory storie) {
     Sweetbook.story(
       storie,
       appConfig: defaultAppConfig,
-      viewport: SBDevelopmentViewport(title: 'TEST'),
+      viewport: devViewport,
     ),
   );
 }

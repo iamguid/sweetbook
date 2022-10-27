@@ -16,26 +16,16 @@ class StoryAppAgent extends Agent<BaseEvent> {
     required this.viewportStateAgent,
     required this.catalogStateAgent,
   }) : super() {
-    router.addListener(routerListener);
-
-    viewportStateAgent.connect(this);
     connect(viewportStateAgent);
-
-    catalogStateAgent.connect(this);
     connect(catalogStateAgent);
-  }
 
-  void routerListener() {}
-
-  @override
-  void onEvent(event) {
-    if (event is CatalogStoryCasePressEvent) {
+    on<CatalogStoryCasePressEvent>((event) {
       dispatch(GlobalEventStoryCaseChanged(event.payload));
       router.pushNamed('/case');
-    }
+    });
 
-    if (event is GlobalEventBackToCatalog) {
+    on<GlobalEventBackToCatalog>((event) {
       router.pop();
-    }
+    });
   }
 }
