@@ -1,3 +1,7 @@
+## 0.2.0
+
+ - Bump "sweetbook" to `0.2.0`.
+
 ## 0.1.1
 
  - Fix layout
