@@ -10,7 +10,7 @@ application and develop your widget with hotreload
 also you can use cli commands for describe
 environment of your widget.
 
-## Test
+## Test (soon)
 You can make screenshots of widget state in
 different environments and compare screenshots
 with referance just using cli commands.
@@ -19,3 +19,6 @@ with referance just using cli commands.
 You can run Sweetbook in special mode with user
 interface where you can explore widgets library
 and change state and environment of your widget.
+
+## Example
+![](./example.gif)
