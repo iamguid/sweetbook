@@ -20,11 +20,11 @@ final candyCardStory = SBStory(storyPath: 'Candies/CandyCard')
     ),
   )
   ..addCase(
-    name: 'cruissant',
+    name: 'croissant',
     decorator: const CenterDecorator(),
     builder: (context) => CandyCard(
       model: CandyModel(
-        title: 'Cruissant',
+        title: 'Croissant',
         price: 1,
         picturePath: 'assets/croissant.jpeg',
       ),

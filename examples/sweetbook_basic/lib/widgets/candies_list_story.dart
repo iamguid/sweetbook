@@ -18,7 +18,7 @@ final candiesListStory = SBStory(storyPath: 'CandiesList')
           picturePath: 'assets/chocolate.jpeg',
         ),
         CandyModel(
-          title: 'Cruissant',
+          title: 'Croissant',
           price: 1,
           picturePath: 'assets/croissant.jpeg',
         ),
