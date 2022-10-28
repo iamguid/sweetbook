@@ -7,14 +7,14 @@ packages:
       name: agent_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.0"
+    version: "0.2.1"
   agent_flutter:
     dependency: transitive
     description:
       name: agent_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.0"
+    version: "0.2.4"
   async:
     dependency: transitive
     description:
@@ -195,7 +195,7 @@ packages:
       path: "../../packages/sweetbook"
       relative: true
     source: path
-    version: "0.1.1"
+    version: "0.2.3"
   term_glyph:
     dependency: transitive
     description:
