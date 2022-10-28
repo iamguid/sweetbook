@@ -1,3 +1,7 @@
+## 0.2.2
+
+ - Bump "sweetbook" to `0.2.2`.
+
 ## 0.2.1
 
  - Bump "sweetbook" to `0.2.1`.
