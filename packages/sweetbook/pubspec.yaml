@@ -1,6 +1,6 @@
 name: sweetbook
 description: Sweetbook main library
-version: 0.2.2
+version: 0.2.3
 homepage: https://github.com/iamguid/sweetbook
 
 environment:
@@ -8,7 +8,7 @@ environment:
 
 dependencies:
   go_router: ^4.5.0
-  agent_flutter: ^0.2.3
+  agent_flutter: ^0.2.4
   flutter:
     sdk: flutter
 
