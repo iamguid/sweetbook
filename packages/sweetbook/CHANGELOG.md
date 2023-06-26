@@ -1,3 +1,7 @@
+## 0.2.5
+
+ - Upgrade deps
+
 ## 0.2.4
 
  - Bump "sweetbook" to `0.2.4`.
