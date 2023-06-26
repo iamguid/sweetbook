@@ -15,6 +15,27 @@ Packages with breaking changes:
 
 Packages with other changes:
 
+ - [`sweetbook` - `v0.2.6`](#sweetbook---v026)
+
+---
+
+#### `sweetbook` - `v0.2.6`
+
+ - Fix warnings
+
+
+## 2023-06-26
+
+### Changes
+
+---
+
+Packages with breaking changes:
+
+ - There are no breaking changes in this release.
+
+Packages with other changes:
+
  - [`sweetbook` - `v0.2.5`](#sweetbook---v025)
 
 ---

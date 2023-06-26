@@ -1,3 +1,7 @@
+## 0.2.6
+
+ - Fix warnings
+
 ## 0.2.5
 
  - Upgrade deps
