@@ -1,6 +1,5 @@
 import 'package:agent_flutter/agent_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:sweetbook/src/catalog_app_agent.dart';
 import 'package:sweetbook/src/widgets/catalog/catalog.dart';
 import 'package:sweetbook/src/widgets/catalog/catalog_events.dart';
 import 'package:sweetbook/src/widgets/catalog/catalog_state_agent.dart';
