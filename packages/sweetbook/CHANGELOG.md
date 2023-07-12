@@ -1,3 +1,7 @@
+## 0.2.7
+
+ - Bump agent_flutter version
+
 ## 0.2.6
 
  - Fix warnings
