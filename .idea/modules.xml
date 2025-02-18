@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/packages/sweetbook/melos_sweetbook.iml" filepath="$PROJECT_DIR$/packages/sweetbook/melos_sweetbook.iml" />
-      <module fileurl="file://$PROJECT_DIR$/packages/sweetbook_cli/melos_sweetbook_cli.iml" filepath="$PROJECT_DIR$/packages/sweetbook_cli/melos_sweetbook_cli.iml" />
-      <module fileurl="file://$PROJECT_DIR$/melos_sweetbook.iml" filepath="$PROJECT_DIR$/melos_sweetbook.iml" />
+<module fileurl="file://$PROJECT_DIR$/packages/sweetbook/melos_sweetbook.iml" filepath="$PROJECT_DIR$/packages/sweetbook/melos_sweetbook.iml" />
+<module fileurl="file://$PROJECT_DIR$/examples/sweetbook_basic/melos_sweetbook_basic.iml" filepath="$PROJECT_DIR$/examples/sweetbook_basic/melos_sweetbook_basic.iml" />
+<module fileurl="file://$PROJECT_DIR$/packages/sweetbook_cli/melos_sweetbook_cli.iml" filepath="$PROJECT_DIR$/packages/sweetbook_cli/melos_sweetbook_cli.iml" />
+<module fileurl="file://$PROJECT_DIR$/melos_sweetbook_workspace.iml" filepath="$PROJECT_DIR$/melos_sweetbook_workspace.iml" />
     </modules>
   </component>
 </project>
