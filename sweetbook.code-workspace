@@ -1,21 +1,21 @@
 {
 	"folders": [
 		{
-			"name": "Main",
-			"path": "."
-		},
-		{
-			"name": "Sweetbook Basic Example",
-			"path": "examples/sweetbook_basic"
-		},
-		{
-			"name": "Sweetbook LIB Package",
+			"name": "sweetbook",
 			"path": "packages/sweetbook"
 		},
 		{
-			"name": "Sweetbook CLI Package",
+			"name": "sweetbook_cli",
 			"path": "packages/sweetbook_cli"
-		}
+		},
+		{
+			"name": "sweetbook_basic",
+			"path": "examples/sweetbook_basic"
+		},
+		{
+			"name": "root",
+			"path": "."
+		},
 	],
 	"settings": {
 		"dart.flutterHotReloadOnSave": "allIfDirty",
