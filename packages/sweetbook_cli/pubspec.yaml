@@ -1,5 +1,6 @@
 name: sweetbook_cli
 version: 0.1.0
+publish_to: none
 description: CLI tool for sweetbook library
 homepage: https://github.com/iamguid/sweetbook
 resolution: workspace
