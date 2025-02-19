@@ -7,22 +7,22 @@ enum SBAppMode {
   story,
 }
 
-abstract class GlobalEvent<T> extends PayloadedEvent<T> {
+abstract class GlobalEvent<T> extends PayloadEvent<T> {
   GlobalEvent(super.payload);
 }
 
-class GlobalEventViewportChanged extends GlobalEvent<SBViewport> {
-  GlobalEventViewportChanged(super.payload);
+class ViewportChanged extends GlobalEvent<SBViewport> {
+  ViewportChanged(super.payload);
 }
 
-class GlobalEventStoryCaseChanged extends GlobalEvent<SBStoryCase> {
-  GlobalEventStoryCaseChanged(super.payload);
+class StoryCaseChanged extends GlobalEvent<SBStoryCase> {
+  StoryCaseChanged(super.payload);
 }
 
-class GlobalEventModeChanged extends GlobalEvent<SBAppMode> {
-  GlobalEventModeChanged(super.payload);
+class ModeChanged extends GlobalEvent<SBAppMode> {
+  ModeChanged(super.payload);
 }
 
-class GlobalEventBackToCatalog extends GlobalEvent<void> {
-  GlobalEventBackToCatalog() : super(null);
+class BackToCatalog extends GlobalEvent<void> {
+  BackToCatalog() : super(null);
 }

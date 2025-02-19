@@ -1,22 +1,22 @@
 import 'package:sweetbook/src/base_event.dart';
 import 'package:sweetbook/sweetbook.dart';
 
-abstract class CatalogEvent<T> extends PayloadedEvent<T> {
+abstract class CatalogEvent<T> extends PayloadEvent<T> {
   CatalogEvent(super.payload);
 }
 
-class CatalogFolderPressEvent extends CatalogEvent<SBFolder> {
-  CatalogFolderPressEvent(super.payload);
+class FolderTapEvent extends CatalogEvent<SBFolder> {
+  FolderTapEvent(super.payload);
 }
 
-class CatalogStoryPressEvent extends CatalogEvent<SBStory> {
-  CatalogStoryPressEvent(super.payload);
+class StoryTapEvent extends CatalogEvent<SBStory> {
+  StoryTapEvent(super.payload);
 }
 
-class CatalogStoryCasePressEvent extends CatalogEvent<SBStoryCase> {
-  CatalogStoryCasePressEvent(super.payload);
+class StoryCaseTapEvent extends CatalogEvent<SBStoryCase> {
+  StoryCaseTapEvent(super.payload);
 }
 
-class CatalogSearchStringChanged extends CatalogEvent<String> {
-  CatalogSearchStringChanged(super.payload);
+class SearchStringChanged extends CatalogEvent<String> {
+  SearchStringChanged(super.payload);
 }

@@ -41,7 +41,7 @@ class HeaderWidget extends StatelessWidget {
                 items: buildViewportsDropdownMenuItems(),
                 value: state.selectedViewport,
                 onChanged: (value) => headerStateAgent
-                    .dispatch(GlobalEventViewportChanged(value!)),
+                    .emit('global', ViewportChanged(value!)),
               )
             ],
           ),

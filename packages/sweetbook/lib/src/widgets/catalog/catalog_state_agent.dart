@@ -1,21 +1,20 @@
 import 'package:agent_flutter/agent_flutter.dart';
-import 'package:sweetbook/src/base_event.dart';
 import 'package:sweetbook/src/global_events.dart';
 import 'package:sweetbook/src/widgets/catalog/catalog_events.dart';
 import 'package:sweetbook/src/widgets/catalog/catalog_state.dart';
 import 'package:sweetbook/sweetbook.dart';
 
-class CatalogStateAgent extends StateAgent<CatalogState, BaseEvent> {
+class CatalogStateAgent extends StateAgent<CatalogState> {
   CatalogStateAgent() : super(CatalogState.empty()) {
-    on<GlobalEventModeChanged>(onAppModeChanged);
-    on<GlobalEventStoryCaseChanged>(onStoryCaseChanged);
-    on<CatalogSearchStringChanged>(onSearchStringChanged);
-    on<CatalogFolderPressEvent>(onFolderPress);
-    on<CatalogStoryPressEvent>(onStoryPress);
-    on<CatalogStoryCasePressEvent>(onStoryCasePress);
+    on<ModeChanged>('global', onAppModeChanged);
+    on<StoryCaseChanged>('global', onStoryCaseChanged);
+    on<SearchStringChanged>('catalog', onSearchStringChanged);
+    on<FolderTapEvent>('catalog', onFolderTap);
+    on<StoryTapEvent>('catalog', onStoryTap);
+    on<StoryCaseTapEvent>('catalog', onStoryCaseTap);
   }
 
-  void onAppModeChanged(GlobalEventModeChanged event) {
+  void onAppModeChanged(String topic, ModeChanged event) {
     final newState = CatalogState(
       expandedNodesPath: state.expandedNodesPath,
       allExapanded: event.payload == SBAppMode.story,
@@ -27,11 +26,11 @@ class CatalogStateAgent extends StateAgent<CatalogState, BaseEvent> {
     nextState(newState);
   }
 
-  void onStoryCaseChanged(GlobalEventStoryCaseChanged event) {
+  void onStoryCaseChanged(String topic, StoryCaseChanged event) {
     changeStoryCase(event.payload);
   }
 
-  void onSearchStringChanged(CatalogSearchStringChanged event) {
+  void onSearchStringChanged(String topic, SearchStringChanged event) {
     final newState = CatalogState(
       expandedNodesPath: state.expandedNodesPath,
       allExapanded:
@@ -44,15 +43,15 @@ class CatalogStateAgent extends StateAgent<CatalogState, BaseEvent> {
     nextState(newState);
   }
 
-  void onFolderPress(CatalogFolderPressEvent event) {
+  void onFolderTap(String topic, FolderTapEvent event) {
     toggleExpandedNode(event.payload);
   }
 
-  void onStoryPress(CatalogStoryPressEvent event) {
+  void onStoryTap(String topic, StoryTapEvent event) {
     toggleExpandedNode(event.payload);
   }
 
-  void onStoryCasePress(CatalogStoryCasePressEvent event) {
+  void onStoryCaseTap(String topic, StoryCaseTapEvent event) {
     changeStoryCase(event.payload);
   }
 

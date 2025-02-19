@@ -49,7 +49,7 @@ class CatalogWidget extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(5)),
                 child: TextFormField(
                   onChanged: (value) => catalogStateAgent
-                      .dispatch(CatalogSearchStringChanged(value)),
+                      .emit('catalog', SearchStringChanged(value)),
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     contentPadding: EdgeInsets.all(10),

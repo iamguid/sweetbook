@@ -68,8 +68,8 @@ class StoryAppProviderState extends State<StoryAppProvider> {
       catalogStateAgent: catalogStateAgent,
     );
 
-    globalAgent.dispatch(GlobalEventModeChanged(SBAppMode.story));
-    globalAgent.dispatch(GlobalEventViewportChanged(widget.viewport));
+    globalAgent.emit('global', ModeChanged(SBAppMode.story));
+    globalAgent.emit('global', ViewportChanged(widget.viewport));
 
     super.initState();
   }

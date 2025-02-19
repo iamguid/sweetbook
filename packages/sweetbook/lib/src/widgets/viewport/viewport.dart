@@ -36,7 +36,7 @@ class ViewportWidget extends StatelessWidget {
                 alignment: Alignment.topLeft,
                 child: ElevatedButton(
                   onPressed: () =>
-                      viewportStateAgent.dispatch(GlobalEventBackToCatalog()),
+                      viewportStateAgent.emit('global', BackToCatalog()),
                   child: Icon(Icons.arrow_back_rounded, color: Colors.white),
                   style: ElevatedButton.styleFrom(
                       shape: CircleBorder(),

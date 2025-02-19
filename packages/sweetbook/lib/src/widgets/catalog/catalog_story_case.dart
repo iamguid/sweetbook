@@ -21,7 +21,7 @@ class CatalogStoryCaseWidget extends StatelessWidget {
           : Colors.transparent,
       child: InkWell(
         onTap: () =>
-            catalogStateAgent.dispatch(CatalogStoryCasePressEvent(storyCase)),
+            catalogStateAgent.emit('catalog', StoryCaseTapEvent(storyCase)),
         child: Padding(
           padding:
               EdgeInsets.symmetric(vertical: catalogElementsVerticalPadding),

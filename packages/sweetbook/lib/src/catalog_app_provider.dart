@@ -66,8 +66,8 @@ class CatalogAppProviderState extends State<CatalogAppProvider> {
       catalogStateAgent: catalogStateAgent,
     );
 
-    globalAgent.dispatch(GlobalEventViewportChanged(widget.viewports.first));
-    globalAgent.dispatch(GlobalEventModeChanged(SBAppMode.catalog));
+    globalAgent.emit('global', ViewportChanged(widget.viewports.first));
+    globalAgent.emit('global', ModeChanged(SBAppMode.catalog));
 
     super.initState();
   }

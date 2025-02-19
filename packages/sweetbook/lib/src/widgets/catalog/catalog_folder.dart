@@ -29,7 +29,7 @@ class CatalogFolderWidget extends StatelessWidget {
             catalogStateAgent.state.allExapanded;
 
     return InkWell(
-      onTap: () => catalogStateAgent.dispatch(CatalogFolderPressEvent(folder)),
+      onTap: () => catalogStateAgent.emit('catalog', FolderTapEvent(folder)),
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: catalogElementsVerticalPadding),
         child: Padding(

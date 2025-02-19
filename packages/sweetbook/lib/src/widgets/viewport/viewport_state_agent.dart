@@ -1,16 +1,15 @@
 import 'package:agent_flutter/agent_flutter.dart';
-import 'package:sweetbook/src/base_event.dart';
 import 'package:sweetbook/src/global_events.dart';
 import 'package:sweetbook/sweetbook.dart';
 
-class ViewportStateAgent extends StateAgent<SBViewportState, BaseEvent> {
+class ViewportStateAgent extends StateAgent<SBViewportState> {
   ViewportStateAgent() : super(SBViewportState.empty()) {
-    on<GlobalEventModeChanged>(onAppModeChanged);
-    on<GlobalEventViewportChanged>(onViewportCahnged);
-    on<GlobalEventStoryCaseChanged>(onStoryCaseCahnged);
+    on<ModeChanged>('global', onAppModeChanged);
+    on<ViewportChanged>('global', onViewportCahnged);
+    on<StoryCaseChanged>('global', onStoryCaseCahnged);
   }
 
-  void onAppModeChanged(GlobalEventModeChanged event) {
+  void onAppModeChanged(String topic, ModeChanged event) {
     final newState = SBViewportState(
       currentStoryCase: state.currentStoryCase,
       viewport: state.viewport,
@@ -20,7 +19,7 @@ class ViewportStateAgent extends StateAgent<SBViewportState, BaseEvent> {
     nextState(newState);
   }
 
-  void onViewportCahnged(GlobalEventViewportChanged event) {
+  void onViewportCahnged(String topic, ViewportChanged event) {
     final newState = SBViewportState(
       currentStoryCase: state.currentStoryCase,
       viewport: event.payload,
@@ -30,7 +29,7 @@ class ViewportStateAgent extends StateAgent<SBViewportState, BaseEvent> {
     nextState(newState);
   }
 
-  void onStoryCaseCahnged(GlobalEventStoryCaseChanged event) {
+  void onStoryCaseCahnged(String topic, StoryCaseChanged event) {
     final newState = SBViewportState(
       currentStoryCase: event.payload,
       viewport: state.viewport,

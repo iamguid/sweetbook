@@ -26,7 +26,7 @@ class CatalogStoryWidget extends StatelessWidget {
             catalogStateAgent.state.allExapanded;
 
     return InkWell(
-      onTap: () => catalogStateAgent.dispatch(CatalogStoryPressEvent(story)),
+      onTap: () => catalogStateAgent.emit('catalog', StoryTapEvent(story)),
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: catalogElementsVerticalPadding),
         child: Padding(
