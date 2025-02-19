@@ -1,3 +1,7 @@
+## 0.3.0
+
+ - Fix bugs and upgrade deps
+
 ## 0.2.7
 
  - Bump agent_flutter version
